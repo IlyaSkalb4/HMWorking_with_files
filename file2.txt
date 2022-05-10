@@ -1,0 +1,11 @@
+Number of digits '0' = 164
+Number of digits '1' = 25
+Number of digits '2' = 135
+Number of digits '3' = 23
+Number of digits '4' = 42
+Number of digits '5' = 69
+Number of digits '6' = 34
+Number of digits '7' = 25
+Number of digits '8' = 50
+Number of digits '9' = 6
+Total digits: 573
