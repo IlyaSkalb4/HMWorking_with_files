@@ -7,29 +7,27 @@ using namespace std;
 
 int main()
 {
-	string strfile, givenword, word;
+	string strfile, givenword, newword, buf, begin, end;
+	int pos = 0;
 	fstream file;
 	file.open("file.txt", ios::in);
-	cout << "Enter word: ";
+	cout << "Change the word: ";
 	cin >> givenword;
-	cout << "Enter word: ";
-	cin >> word;
+	cout << "to: ";
+	cin >> newword;
 	if (!file.is_open())
 	{
 		cout << "Not found" << endl;
 	}
 	else
 	{
-		string buf, begin, end;
 		while (getline(file, buf))
 		{
 			strfile += buf;
 			strfile += "\n";
 		}
 		file.close();
-		int pos;
 		cout << strfile << endl;
-		
 		do
 		{
 			buf.clear();
@@ -52,7 +50,7 @@ int main()
 						end+=strfile[i];
 					}
 				}
-				buf = begin + word + end;
+				buf = begin + newword + end;
 				strfile = buf;
 				begin.clear();
 				end.clear();
