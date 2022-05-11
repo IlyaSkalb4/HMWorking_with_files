@@ -7,31 +7,67 @@ using namespace std;
 
 int main()
 {
-	ifstream file;
-	ofstream file2;
-	string strfile, strfile2;
-	int countr = 0, length = 0;
+	fstream file;
+	string strfile, buf, begin, end;
+	bool logik;
+	char symbol = '.';
+	int pos = 0;
 	file.open("file.txt", ios::in);
-	file2.open("file2.txt", ios::out);
 	if (!file.is_open())
 	{
-		cout << "Not found";
+		cout << "Not found" << endl;
 	}
 	else
 	{
 		while (getline(file, strfile))
 		{
-			char* pch = strtok((char*)strfile.c_str(), ".");
-			while (pch != NULL)
+			buf += strfile;
+			buf += "\n";
+		}
+		strfile.clear();
+		file.close();
+		do
+		{
+			pos = buf.find(symbol);
+			logik = true;
+			if (pos == -1)
 			{
-				if (islower(pch[0]))
-				{
-					pch[0] = toupper(pch[0]);
-				}
-				file2 << pch << ".";
-				pch = strtok(NULL, ".");
+				break;
 			}
-			file2 << endl;
+			else
+			{
+				for (int i = 0; i < buf.length(); i++)
+				{
+					if (i <= pos)
+					{
+						begin += buf[i];
+						if (islower(buf[i])&&logik)
+						{
+							begin[i] = toupper(begin[i]);
+							logik = false;
+						}
+					}
+					else if (i > pos)
+					{
+						end += buf[i];
+
+					}
+				}
+				strfile += begin;
+				buf = end;
+				begin.clear();
+				end.clear();
+			}
+		} while (true);
+		file.open("file.txt", ios::out | ios::ate);
+		if (!file.is_open())
+		{
+			cout << "Not found" << endl;
+		}
+		else
+		{
+			file << strfile << endl;
+			file.close();
 		}
 	}
 	return 0;
